@@ -8,8 +8,11 @@ import { hightlightsSlides } from "../constants";
 import { pauseImg, playImg, replayImg } from "../utils";
 
 const VideoCarousel = () => {
+  // 3 reférence de video
   const videoRef = useRef([]);
+  // 3 référence de la span video
   const videoSpanRef = useRef([]);
+  // 3 référence de la ref de chaque div
   const videoDivRef = useRef([]);
 
   // video and indicator
@@ -36,6 +39,7 @@ const VideoCarousel = () => {
     gsap.to("#video", {
       scrollTrigger: {
         trigger: "#video",
+        // peu importe que l'on vienne d'en haut ou bas, on veut que la video recommence
         toggleActions: "restart none none none",
       },
       onComplete: () => {
@@ -49,12 +53,18 @@ const VideoCarousel = () => {
   }, [isEnd, videoId]);
 
   useEffect(() => {
+    //au début, il n'y a pas de video en route
     let currentProgress = 0;
+
+    // On déterminer dans quelle span on se situe
     let span = videoSpanRef.current;
 
+    // Ici on anime la progression de la vidéo
     if (span[videoId]) {
+
       // animation to move the indicator
       let anim = gsap.to(span[videoId], {
+
         onUpdate: () => {
           // get the progress of the video
           const progress = Math.ceil(anim.progress() * 100);
@@ -152,7 +162,8 @@ const VideoCarousel = () => {
         return video;
     }
   };
-
+  //loadeddata est les données charger pour chaque video
+  // on ajoute l'événement e au métadata pour conserver les données de chargement
   const handleLoadedMetaData = (i, e) => setLoadedData((pre) => [...pre, e]);
 
   return (
@@ -226,6 +237,7 @@ const VideoCarousel = () => {
             }
           />
         </button>
+      
       </div>
     </>
   );

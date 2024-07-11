@@ -34,6 +34,7 @@ const Model = () => {
 
   useEffect(() => {
     if(size === 'large') {
+      // from view1 to view2
       animateWithGsapTimeline(tl, small, smallRotation, '#view1', '#view2', {
         transform: 'translateX(-100%)',
         duration: 2
@@ -91,8 +92,10 @@ const Model = () => {
                 right: 0,
                 overflow: 'hidden'
               }}
+              // Important pour intéragir avec le model
               eventSource={document.getElementById('root')}
             >
+              {/* Le view.port permet de montrer plusieurs view  */}
               <View.Port />
             </Canvas>
           </div>

@@ -11,13 +11,15 @@ import React, { useEffect, useRef } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
 
 function Model(props) {
-  const { nodes, materials } = useGLTF("/models/scene.glb");
+  const { nodes, materials } = useGLTF("/models/scene.glb"); // Charger le modèle GLTF
 
-  const texture = useTexture(props.item.img);
+  // sert tout en bas   <meshStandardMaterial roughness={1} map={texture} /> en faisant une recherche de eiu commande F
+  const texture = useTexture(props.item.img); // Charger une texture à partir d'une image
 
     useEffect(() => {
+        // Parcourir les matériaux du modèle 3D
       Object.entries(materials).map((material) => {
-        // these are the material names that can't be changed color
+        // Liste des noms de matériaux dont la couleur ne doit pas être modifiée
         if (
           material[0] !== "zFdeDaGNRwzccye" &&
           material[0] !== "ujsvqBWRMnqdwPx" &&
@@ -25,11 +27,13 @@ function Model(props) {
           material[0] !== "jlzuBkUzuJqgiAK" &&
           material[0] !== "xNrofRCqOXXHVZt"
         ) {
+            // Modifier la couleur des autres matériaux
           material[1].color = new THREE.Color(props.item.color[0]);
         }
+         // Indiquer que le matériau a besoin d'être mis à jour
         material[1].needsUpdate = true;
       });
-    }, [materials, props.item]);
+    }, [materials, props.item]); // Le hook useEffect dépend des matériaux et des props de l'élément
   
   return (
     <group {...props} dispose={null}>

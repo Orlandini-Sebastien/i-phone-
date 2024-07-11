@@ -29,11 +29,15 @@ canvas {
   max-width: 1120px;
 }
 
+/* Permet de créer une nouvelle classe pour éviter les répétitions !! */
 @layer utilities {
+  /* Classe permettant de centrer le container ou div  */
   .flex-center {
     @apply flex items-center justify-center
   }
 
+  /* Si la barre de navigation fait 60px, le reste s'adapte pour faire le reste de la 
+  fenetre  */
   .nav-height {
     @apply h-[calc(100vh-60px)]
   }
@@ -54,10 +58,12 @@ canvas {
     @apply w-10 h-10 text-sm flex justify-center items-center bg-white text-black rounded-full transition-all
   }
 
+  /* Application d'un padding responsive */
   .common-padding {
     @apply sm:py-32 py-20 sm:px-10 px-5
   }
 
+  /* Permet de gérer tout les heading de la même manière  */
   .section-heading {
     @apply text-gray lg:text-6xl md:text-5xl text-3xl lg:mb-0 mb-5 font-medium opacity-0 translate-y-20
   }
